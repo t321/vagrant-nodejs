@@ -27,6 +27,8 @@ Vagrant.configure(2) do |config|
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   # config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.network "public_network", ip: "192.168.1.7"
+
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -39,7 +41,7 @@ Vagrant.configure(2) do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
   config.vm.synced_folder "~/Projects/MOOC JS", "/MOOC"
-  
+
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
@@ -71,9 +73,13 @@ Vagrant.configure(2) do |config|
   # SHELL
   config.vm.provision "shell", inline: <<-SHELL
         sudo apt-get update
-        sudo apt-get install -y apache2 
+        sudo apt-get -y upgrade
         curl -sL https://deb.nodesource.com/setup | sudo bash -
         sudo apt-get install -y nodejs build-essential
-
+        sudo apt-get install -y zsh git
+        git clone git://github.com/robbyrussell/oh-my-zsh.git /home/vagrant/.oh-my-zsh
+        #Need a manual change, visit https://github.com/t321/vagrant-nodejs
+        #sudo -u vagrant chsh -s /usr/bin/zsh
+        wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh    
  SHELL
 end

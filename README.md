@@ -11,3 +11,6 @@ Vagrant box with Node.js
 > cd [repository]
 
 > vagrant up
+
+6. You need to change the default shell (if you want), you could change in the file `/etc/passwd`. Change your shell with `/bin/zsh`.
+6.1 You could try with `sudo -u vagrant chsh -s /usr/bin/zsh`
